@@ -1,12 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import '../models/transaction.dart' as app_transaction;
+import '../models/transaction.dart'; // يحتوي على PrintTransaction
 import '../providers/transaction_provider.dart';
 
 class AddEditTransactionScreen extends StatefulWidget {
-  final app_transaction.Transaction? transaction;
+  final PrintTransaction? transaction;
 
   const AddEditTransactionScreen({super.key, this.transaction});
 
@@ -69,7 +68,7 @@ class _AddEditTransactionScreenState extends State<AddEditTransactionScreen> {
 
   void _submit() {
     if (_formKey.currentState!.validate()) {
-      final newTransaction = app_transaction.Transaction(
+      final newTransaction = PrintTransaction(
         id: widget.transaction?.id,
         transactionDate: widget.transaction?.transactionDate ?? DateTime.now(),
         className: _className!,
