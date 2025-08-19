@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import '../helpers/database_helper.dart';
 
 class TransactionProvider with ChangeNotifier {
-  List<Transaction> _transactions = [];
+  List<PrintTransaction> _transactions = [];
   final DatabaseHelper _dbHelper = DatabaseHelper();
 
-  List<Transaction> get transactions => _transactions;
+  List<PrintTransaction> get transactions => _transactions;
 
   Future<void> fetchTransactions({
     String? className,
@@ -24,12 +23,12 @@ class TransactionProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addTransaction(Transaction transaction) async {
+  Future<void> addTransaction(PrintTransaction transaction) async {
     await _dbHelper.insertTransaction(transaction);
     await fetchTransactions(); // Refresh the list
   }
 
-  Future<void> updateTransaction(Transaction transaction) async {
+  Future<void> updateTransaction(PrintTransaction transaction) async {
     await _dbHelper.updateTransaction(transaction);
     await fetchTransactions(); // Refresh the list
   }
