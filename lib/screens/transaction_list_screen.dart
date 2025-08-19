@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -9,7 +8,7 @@ import 'package:share_plus/share_plus.dart';
 import 'dart:io';
 
 import '../providers/transaction_provider.dart';
-import '../models/transaction.dart' as app_transaction;
+import '../models/transaction.dart'; // يحتوي على PrintTransaction
 import 'add_edit_transaction_screen.dart';
 
 class TransactionListScreen extends StatefulWidget {
@@ -58,7 +57,7 @@ class _TransactionListScreenState extends State<TransactionListScreen> {
     }
   }
   
-  Future<void> _generateAndSharePdf(app_transaction.Transaction tx) async {
+  Future<void> _generateAndSharePdf(PrintTransaction tx) async {
     final pdf = pw.Document();
     pdf.addPage(
       pw.Page(
