@@ -1,7 +1,6 @@
-
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/transaction.dart';
+import '../models/transaction.dart'; // يحتوي الآن على PrintTransaction
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
@@ -39,17 +38,17 @@ class DatabaseHelper {
         remainingBalance REAL NOT NULL,
         paymentStatus TEXT NOT NULL
       )
-      ''');
+    ''');
   }
 
   // Insert a transaction
-  Future<int> insertTransaction(Transaction transaction) async {
+  Future<int> insertTransaction(PrintTransaction transaction) async {
     Database db = await database;
     return await db.insert('transactions', transaction.toMap());
   }
 
   // Update a transaction
-  Future<int> updateTransaction(Transaction transaction) async {
+  Future<int> updateTransaction(PrintTransaction transaction) async {
     Database db = await database;
     return await db.update(
       'transactions',
@@ -70,7 +69,7 @@ class DatabaseHelper {
   }
 
   // Get all transactions with optional filters
-  Future<List<Transaction>> getTransactions({
+  Future<List<PrintTransaction>> getTransactions({
     String? className,
     String? instructorName,
     String? date,
@@ -97,10 +96,10 @@ class DatabaseHelper {
       whereArgs.add(date);
     }
     if (query != null && query.isNotEmpty) {
-        if (whereClause.isNotEmpty) whereClause += ' AND ';
-        whereClause += '(className LIKE ? OR instructorName LIKE ?)';
-        whereArgs.add('%$query%');
-        whereArgs.add('%$query%');
+      if (whereClause.isNotEmpty) whereClause += ' AND ';
+      whereClause += '(className LIKE ? OR instructorName LIKE ?)';
+      whereArgs.add('%$query%');
+      whereArgs.add('%$query%');
     }
 
     maps = await db.query(
@@ -111,7 +110,7 @@ class DatabaseHelper {
     );
 
     return List.generate(maps.length, (i) {
-      return Transaction.fromMap(maps[i]);
+      return PrintTransaction.fromMap(maps[i]);
     });
   }
 
