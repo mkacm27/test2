@@ -1,5 +1,4 @@
-
-class Transaction {
+class PrintTransaction {
   int? id;
   DateTime transactionDate;
   String className;
@@ -11,7 +10,7 @@ class Transaction {
   double remainingBalance;
   String paymentStatus;
 
-  Transaction({
+  PrintTransaction({
     this.id,
     required this.transactionDate,
     required this.className,
@@ -24,7 +23,7 @@ class Transaction {
     required this.paymentStatus,
   });
 
-  // Convert a Transaction object into a Map object.
+  // Convert a PrintTransaction object into a Map object.
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -40,9 +39,9 @@ class Transaction {
     };
   }
 
-  // Extract a Transaction object from a Map object.
-  factory Transaction.fromMap(Map<String, dynamic> map) {
-    return Transaction(
+  // Extract a PrintTransaction object from a Map object.
+  factory PrintTransaction.fromMap(Map<String, dynamic> map) {
+    return PrintTransaction(
       id: map['id'],
       transactionDate: DateTime.parse(map['transactionDate']),
       className: map['className'],
